@@ -102,3 +102,6 @@ venv.bak/
 /csv
 # mypy
 .mypy_cache/
+
+#txt file
+*.txt
