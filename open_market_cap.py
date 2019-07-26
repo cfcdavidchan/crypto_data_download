@@ -1,7 +1,10 @@
 import csv, requests, os
 
-def open_market_cap(csv_dir_path):
-    csv_file_path = os.path.join(csv_dir_path, 'openmarketcap.csv')
+def open_market_cap_to_csv(csv_dir_path=os.getcwd(), csv_name='openmarketcap.csv'):
+    csv_file_path = os.path.join(csv_dir_path, csv_name)
+
+    if os.path.exists(csv_file_path):
+        os.remove(csv_file_path)
 
     url = "http://api.openmarketcap.com/api/v1/tokens"
     r = requests.get(url)
@@ -10,7 +13,7 @@ def open_market_cap(csv_dir_path):
     with open(csv_file_path, mode='w') as csv_file:
         csv_file_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        data_key = list(all_data.keys())
+        data_key = list(all_data[0].keys())
 
         csv_file_writer.writerow(data_key) #write header
 
@@ -21,9 +24,5 @@ def open_market_cap(csv_dir_path):
             csv_file_writer.writerow(entry)
 
 if __name__ == '__main__':
-
-    url = "http://api.openmarketcap.com/api/v1/tokens"
-    r = requests.get(url)
-    all_data = r.json()
-
-    print(all_data)
+    csv_name = 'test.csv'
+    open_market_cap_to_csv(csv_name=csv_name)

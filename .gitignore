@@ -105,3 +105,10 @@ venv.bak/
 
 #txt file
 *.txt
+
+#csv fole
+*.csv
+
+#all testing file
+test.*
+testing.*
